@@ -54,5 +54,5 @@ int main(int argc, char* argv[])
 		if (!handleRawMessage(msg.message, msg.wParam, msg.lParam)) break;
 	}
 	UnhookWindowsHookEx(hhkKeyboard);
-	return msg.wParam;
+	return (int)msg.wParam;
 }
