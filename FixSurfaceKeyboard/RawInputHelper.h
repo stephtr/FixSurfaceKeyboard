@@ -15,6 +15,7 @@ KeyboardType identifyDevice(wchar_t* name) {
 	if (wcsstr(name, L"VID_045E")) {
 		if (wcsstr(name, L"PID_07DC")) return KT_SURFACE_TYPECOVER_3;
 		if (wcsstr(name, L"PID_07E8")) return KT_SURFACE_TYPECOVER_4;
+		if (wcsstr(name, L"PID_09C0")) return KT_SURFACE_TYPECOVER_2017;
 	}
 	if (wcsstr(name, L"_VID&02045e")) {
 		if (wcsstr(name, L"_PID&0817")) return KT_SURFACE_ERGONOMIC;

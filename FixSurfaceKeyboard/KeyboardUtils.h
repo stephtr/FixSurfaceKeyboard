@@ -6,6 +6,7 @@ enum KeyboardType {
 	KT_UNKNOWN,
 	KT_SURFACE_TYPECOVER_3,
 	KT_SURFACE_TYPECOVER_4,
+	KT_SURFACE_TYPECOVER_2017,
 	KT_SURFACE_ERGONOMIC
 };
 
@@ -48,6 +49,12 @@ std::unordered_map<KeyboardType, KeyboardMap> g_keymaps = {
 		// L_WIN, F21 => F8
 } },
 { KT_SURFACE_TYPECOVER_4, KeyboardMap{
+	{ VK_MEDIA_PLAY_PAUSE, VK_F3 },
+	{ VK_VOLUME_MUTE, VK_F4 },
+	{ VK_VOLUME_DOWN, VK_F5 },
+	{ VK_VOLUME_UP, VK_F6 }
+} },
+{ KT_SURFACE_TYPECOVER_2017, KeyboardMap{
 	{ VK_MEDIA_PLAY_PAUSE, VK_F3 },
 	{ VK_VOLUME_MUTE, VK_F4 },
 	{ VK_VOLUME_DOWN, VK_F5 },
