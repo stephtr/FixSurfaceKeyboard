@@ -32,10 +32,6 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	//logfile.open("C:\\Users\\steph\\Desktop\\FixSurfaceKeyboard.log", std::ios_base::app);
-	//time_t time = std::time(0);
-	//logfile << "Starting at " << time << std::endl;
-
 	HWND hwnd = CreateWindow(L"STATIC", NULL, 0, 0, 0, 0, 0, HWND_MESSAGE, NULL, NULL, NULL);
 
 	RAWINPUTDEVICE* rid = new RAWINPUTDEVICE[1];

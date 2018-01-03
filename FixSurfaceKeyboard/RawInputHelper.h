@@ -4,9 +4,6 @@
 #include "KeyboardUtils.h"
 
 
-//#include <fstream>
-//std::ofstream logfile;
-
 std::unordered_map<HANDLE, KeyboardType> g_deviceTypes;
 KeyboardType g_lastUsedKeyboard = KT_UNKNOWN;
 
@@ -57,11 +54,17 @@ void handleDeviceAdd(HANDLE hDevice)
 	if (type != KT_UNKNOWN) {
 		g_deviceTypes[hDevice] = type;
 	}
+#ifdef _DEBUG
+	std::wcout << (type == KT_UNKNOWN ? "unknown" : "known") << " keyboard added: " << deviceName << std::endl;
+#endif
 	delete[] deviceName;
 }
 
 void handleDeviceRemove(HANDLE hDevice) {
 	g_deviceTypes.erase(hDevice);
+#ifdef _DEBUG
+	std::cout << "keyboard removed" << std::endl;
+#endif
 }
 
 bool handleRawMessage(UINT message, WPARAM wParam, LPARAM lParam)
@@ -77,8 +80,5 @@ bool handleRawMessage(UINT message, WPARAM wParam, LPARAM lParam)
 		return true;
 	}
 	}
-	//logfile << "{ message = " << message << ", wParam = " <<
-	//	wParam << ", lParam = " << lParam << " }" << std::endl;
-	//logfile.flush();
 	return true;
 }

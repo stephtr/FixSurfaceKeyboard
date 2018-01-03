@@ -37,7 +37,7 @@ int getModifierStatus() {
 typedef std::unordered_map<DWORD, DWORD> KeyboardMap;
 typedef DWORD(*KeyboardCallback)(DWORD);
 
-// Problem: z.B. TypeCover 3: L_ALT + "F5" = L_SHIFT + "F6" = L_ALT + L_SHIFT + "F8"
+// problem: for example Type Cover 3: L_ALT + "F5" = L_SHIFT + "F6" = L_ALT + L_SHIFT + "F8"
 
 std::unordered_map<KeyboardType, KeyboardMap> g_keymaps = {
 	{ KT_SURFACE_TYPECOVER_3, KeyboardMap{
