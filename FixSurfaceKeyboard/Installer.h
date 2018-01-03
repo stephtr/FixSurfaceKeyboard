@@ -82,6 +82,32 @@ bool scheduleTask(bool install = true, char *location = NULL) {
 		CoUninitialize();
 		return 1;
 	}
+	hr = pSettings->put_StopIfGoingOnBatteries(false);
+	if (FAILED(hr))
+	{
+		pRootFolder->Release();
+		pTask->Release();
+		CoUninitialize();
+		return 1;
+	}
+	IIdleSettings *pIdleSettings = NULL;
+	hr = pSettings->get_IdleSettings(&pIdleSettings);
+	if (FAILED(hr))
+	{
+		pRootFolder->Release();
+		pTask->Release();
+		CoUninitialize();
+		return 1;
+	}
+	pIdleSettings->put_StopOnIdleEnd(false);
+	hr = pSettings->put_IdleSettings(pIdleSettings);
+	if (FAILED(hr))
+	{
+		pRootFolder->Release();
+		pTask->Release();
+		CoUninitialize();
+		return 1;
+	}
 	hr = pSettings->put_ExecutionTimeLimit(L"PT0S");
 	pSettings->Release();
 	if (FAILED(hr))
