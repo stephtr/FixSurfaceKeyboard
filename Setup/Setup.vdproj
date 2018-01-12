@@ -44,6 +44,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.6.1"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.6.1 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.6.1"
+                    }
+                }
             }
         }
         "Release"
@@ -189,15 +197,15 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:FixSurfaceKeyboard"
-        "ProductCode" = "8:{D92722F6-84FA-4E6E-9FD9-911692A458D3}"
-        "PackageCode" = "8:{9A4ACBD7-0E36-42BB-9D67-398116F1653F}"
+        "ProductCode" = "8:{45555D2E-BB75-4407-A2B9-B68EC9FC01D9}"
+        "PackageCode" = "8:{90F7D4C9-B1BA-4723-B2C3-459718CCE54F}"
         "UpgradeCode" = "8:{A4331800-4547-429D-B43B-EC66D61535F5}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
-        "RemovePreviousVersions" = "11:FALSE"
+        "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:1.0.1"
+        "ProductVersion" = "8:1.0.2"
         "Manufacturer" = "8:Troyer"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
