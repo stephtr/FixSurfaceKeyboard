@@ -18,8 +18,9 @@ Administrative privileges are not required for running this program, even though
 
 ### Support for (additional) keyboards
 
-Since I am limited to just a handful of keyboards this program currently just supports (I am not sure if that support at the moment is limited to the German keyboard layout):
+Since I am limited to just a handful of keyboards this program currently just supports (I am not sure if that support at the moment is limited to specific keyboard layouts):
 - Surface Type Cover 3/4/2017
+- Surface Book 1
 - Surface Ergonomic Keyboard
 
 Adding additional keyboards is appreciated and should be quite simple (see [#2](https://github.com/stephtr/FixSurfaceKeyboard/issues/2)), it also would be nice if someone could verify if the program currently works with one of the keyboards mentioned above running another (for example English) keyboard layout.
