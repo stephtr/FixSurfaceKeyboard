@@ -22,7 +22,7 @@ enum PressedKey {
 	PK_RWIN = 1 << 7,
 };
 
-int getModifierStatus() {
+int getModifierState() {
 	int result = 0;
 	if (GetKeyState(VK_LSHIFT) < 0) result |= PK_LSHIFT;
 	if (GetKeyState(VK_RSHIFT) < 0) result |= PK_RSHIFT;
@@ -41,7 +41,7 @@ typedef DWORD(*KeyboardCallback)(DWORD);
 // problem: for example Type Cover 3: L_ALT + "F5" = L_SHIFT + "F6" = L_ALT + L_SHIFT + "F8"
 
 std::unordered_map<KeyboardType, KeyboardMap> g_keymaps = {
-	{ KT_SURFACE_TYPECOVER_3, KeyboardMap{
+	{ KT_SURFACE_TYPECOVER_3, {
 		{ VK_VOLUME_MUTE, VK_F3 },
 		{ VK_MEDIA_PLAY_PAUSE, VK_F4 },
 		// L_SHIFT, L_WIN, F21 => F5
@@ -49,19 +49,19 @@ std::unordered_map<KeyboardType, KeyboardMap> g_keymaps = {
 		// L_CTRL, L_WIN, VK_SEPARATOR => F7
 		// L_WIN, F21 => F8
 } },
-{ KT_SURFACE_TYPECOVER_4, KeyboardMap{
+{ KT_SURFACE_TYPECOVER_4, {
 	{ VK_MEDIA_PLAY_PAUSE, VK_F3 },
 	{ VK_VOLUME_MUTE, VK_F4 },
 	{ VK_VOLUME_DOWN, VK_F5 },
 	{ VK_VOLUME_UP, VK_F6 }
 } },
-{ KT_SURFACE_TYPECOVER_2017, KeyboardMap{
+{ KT_SURFACE_TYPECOVER_2017, {
 	{ VK_MEDIA_PLAY_PAUSE, VK_F3 },
 	{ VK_VOLUME_MUTE, VK_F4 },
 	{ VK_VOLUME_DOWN, VK_F5 },
 	{ VK_VOLUME_UP, VK_F6 }
 } },
-{ KT_SURFACE_ERGONOMIC,{
+{ KT_SURFACE_ERGONOMIC, {
 	{ VK_VOLUME_MUTE, VK_F1 },
 	{ VK_VOLUME_DOWN, VK_F2 },
 	{ VK_VOLUME_UP, VK_F3 },
@@ -73,7 +73,7 @@ std::unordered_map<KeyboardType, KeyboardMap> g_keymaps = {
 	// L_WIN, R_CTRL, F21 => F11
 	// L_WIN, F21 => F12
 } },
-{ KT_SURFACEBOOK_1,{
+{ KT_SURFACEBOOK_1, {
 	{ VK_MEDIA_PLAY_PAUSE, VK_F3 },
 	{ VK_VOLUME_MUTE, VK_F4 },
 	{ VK_VOLUME_DOWN, VK_F5 },
@@ -81,37 +81,59 @@ std::unordered_map<KeyboardType, KeyboardMap> g_keymaps = {
 } }
 };
 
+bool handleKey_SurfaceErgonomic(DWORD vk, int modifierState, bool keydown);
+
+void SendKey(WORD vk, bool keydown = true) {
+	INPUT generated;
+	generated.type = INPUT_KEYBOARD;
+	generated.ki.wVk = vk;
+	generated.ki.wScan = MapVirtualKey(vk, MAPVK_VK_TO_VSC);
+	generated.ki.dwFlags = keydown ? 0 : KEYEVENTF_KEYUP;
+	generated.ki.time = 0;
+	generated.ki.dwExtraInfo = 0;
+#ifdef _DEBUG
+	std::cout << "generate keyboard event" << std::endl;
+#endif
+	SendInput(1, &generated, sizeof(INPUT));
+}
+
 bool handleKey_map(DWORD vk, KeyboardType type, PKBDLLHOOKSTRUCT data) {
 	KeyboardMap::const_iterator got = g_keymaps[type].find(vk);
-	if (got == g_keymaps[type].end() || getModifierStatus() == 0) return false;
-	if (data->flags & LLKHF_EXTENDED) {
-		INPUT generated;
-		generated.type = INPUT_KEYBOARD;
-		generated.ki.wVk = (WORD)got->second;
-		generated.ki.wScan = MapVirtualKey(got->second, MAPVK_VK_TO_VSC);
-		generated.ki.dwFlags = data->flags & LLKHF_UP ? KEYEVENTF_KEYUP : 0;
-		generated.ki.time = 0;
-		generated.ki.dwExtraInfo = 0;
-#ifdef _DEBUG
-		std::cout << "generate keyboard event" << std::endl;
-#endif
-		SendInput(1, &generated, sizeof(INPUT));
+	int modifierState = getModifierState();
+	bool keydown = !(data->flags & LLKHF_UP);
+
+	if (modifierState == 0) return false;
+	if (got != g_keymaps[type].end() && data->flags & LLKHF_EXTENDED) {
+		SendKey((WORD)got->second, keydown);
+		return true;
 	}
-	return true;
+	switch (type)
+	{
+	case KT_SURFACE_ERGONOMIC: return handleKey_SurfaceErgonomic(vk, modifierState, keydown);
+	}
+	return false;
 }
 
-bool handleKey_SurfaceTypecover3(DWORD vk, PKBDLLHOOKSTRUCT data) {
+bool handleKey_SurfaceErgonomic(DWORD vk, int modifierState, bool keydown) {
 	bool handleKey = false;
 
-	return handleKey;
-}
+	// When switching to German keyboard layout,
+	// pressing the action center key results in Shift + Ctrl + Alt + Win + F21,
+	// which (obviously) doesn't open the action center.
+	static bool blockActionCenter = false;
+	if (keydown
+		&& vk == VK_F21 && modifierState == (PK_RSHIFT | PK_LCTRL | PK_RALT | PK_LWIN)
+		&& !blockActionCenter)
+	{
+		SendKey(VK_RSHIFT, false);
+		SendKey(VK_LCONTROL, false);
+		SendKey(VK_RMENU, false);
+		SendKey('A');
+		blockActionCenter = true;
+		return true;
+	}
+	if (!keydown && vk == VK_LWIN)
+		blockActionCenter = false;
 
-bool handleKey_SurfaceTypecover4(DWORD vk, PKBDLLHOOKSTRUCT data) {
-	bool handleKey = false;
-	return handleKey;
-}
-
-bool handleKey_SurfaceErgonomic(DWORD vk, PKBDLLHOOKSTRUCT data) {
-	bool handleKey = false;
 	return handleKey;
 }
