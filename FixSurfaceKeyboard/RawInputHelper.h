@@ -15,8 +15,9 @@ KeyboardType identifyDevice(wchar_t* name) {
 		if (wcsstr(name, L"PID_09C0")) return KT_SURFACE_TYPECOVER_2017;
 		if (wcsstr(name, L"PID_07CD")) return KT_SURFACEBOOK_1;
 	}
-	if (wcsstr(name, L"_VID&02045e")) {
-		if (wcsstr(name, L"_PID&0817")) return KT_SURFACE_ERGONOMIC;
+	if (wcsstr(name, L"_VID&02045E") || wcsstr(name, L"_VID&02045e")) {
+		if (wcsstr(name, L"_PID&0817")) return KT_SURFACE_KEYBOARD; // Surface Ergonomic Keyboard
+		if (wcsstr(name, L"_PID&0917")) return KT_SURFACE_KEYBOARD; // Surface Keyboard
 	}
 	return KT_UNKNOWN;
 }

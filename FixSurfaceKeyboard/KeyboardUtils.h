@@ -8,7 +8,7 @@ enum KeyboardType {
 	KT_SURFACE_TYPECOVER_4,
 	KT_SURFACE_TYPECOVER_2017,
 	KT_SURFACEBOOK_1,
-	KT_SURFACE_ERGONOMIC
+	KT_SURFACE_KEYBOARD // Surface Keyboard and Surface Ergonomic Keyboard
 };
 
 enum PressedKey {
@@ -61,7 +61,7 @@ std::unordered_map<KeyboardType, KeyboardMap> g_keymaps = {
 	{ VK_VOLUME_DOWN, VK_F5 },
 	{ VK_VOLUME_UP, VK_F6 }
 } },
-{ KT_SURFACE_ERGONOMIC, {
+{ KT_SURFACE_KEYBOARD, {
 	{ VK_VOLUME_MUTE, VK_F1 },
 	{ VK_VOLUME_DOWN, VK_F2 },
 	{ VK_VOLUME_UP, VK_F3 },
@@ -81,7 +81,7 @@ std::unordered_map<KeyboardType, KeyboardMap> g_keymaps = {
 } }
 };
 
-bool handleKey_SurfaceErgonomic(DWORD vk, int modifierState, bool keydown);
+bool handleKey_SurfaceKeyboard(DWORD vk, int modifierState, bool keydown);
 
 void SendKey(WORD vk, bool keydown = true) {
 	INPUT generated;
@@ -109,12 +109,12 @@ bool handleKey_map(DWORD vk, KeyboardType type, PKBDLLHOOKSTRUCT data) {
 	}
 	switch (type)
 	{
-	case KT_SURFACE_ERGONOMIC: return handleKey_SurfaceErgonomic(vk, modifierState, keydown);
+	case KT_SURFACE_KEYBOARD: return handleKey_SurfaceKeyboard(vk, modifierState, keydown);
 	}
 	return false;
 }
 
-bool handleKey_SurfaceErgonomic(DWORD vk, int modifierState, bool keydown) {
+bool handleKey_SurfaceKeyboard(DWORD vk, int modifierState, bool keydown) {
 	bool handleKey = false;
 
 	// When switching to German keyboard layout,
