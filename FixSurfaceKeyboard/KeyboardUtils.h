@@ -125,10 +125,7 @@ bool handleKey_SurfaceKeyboard(DWORD vk, int modifierState, bool keydown) {
 		&& vk == VK_F21 && modifierState == (PK_RSHIFT | PK_LCTRL | PK_RALT | PK_LWIN)
 		&& !blockActionCenter)
 	{
-		SendKey(VK_RSHIFT, false);
-		SendKey(VK_LCONTROL, false);
-		SendKey(VK_RMENU, false);
-		SendKey('A');
+		ShellExecute(0, 0, L"ms-actioncenter:", 0, 0, SW_HIDE);
 		blockActionCenter = true;
 		return true;
 	}
