@@ -13,9 +13,14 @@ LRESULT CALLBACK keyboardHook(int nCode, WPARAM wParam, LPARAM lParam)
 		PKBDLLHOOKSTRUCT data = (PKBDLLHOOKSTRUCT)lParam;
 		removeKey = handleKey_map(data->vkCode, g_lastUsedKeyboard, data);
 #ifdef _DEBUG
-		if (!removeKey) {
-			std::cout << (data->flags & LLKHF_UP ? "UP" : "DOWN") << " rFlags=" << (data->flags & ~LLKHF_UP & ~LLKHF_INJECTED) << " extraInfo=" << data->dwExtraInfo << " scanCode=" << data->scanCode << " VK=" << data->vkCode << std::endl;
-		}
+		std::cout
+			<< (removeKey ? "skip " : "")
+			<< (data->flags & LLKHF_UP ? "UP" : "DOWN")
+			<< " rFlags=" << (data->flags & ~LLKHF_UP & ~LLKHF_INJECTED)
+			<< " extraInfo=" << data->dwExtraInfo
+			<< " scanCode=" << data->scanCode
+			<< " VK=" << data->vkCode
+			<< std::endl;
 #endif
 	}
 	return removeKey ? 1 : CallNextHookEx(NULL, nCode, wParam, lParam);
