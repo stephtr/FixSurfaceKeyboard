@@ -37,8 +37,6 @@ int main(int argc, char* argv[])
 		}
 	}
 
-	RegisterApplicationRestart(NULL, 0);
-
 	HWND hwnd = CreateWindow(L"STATIC", NULL, 0, 0, 0, 0, 0, HWND_MESSAGE, NULL, NULL, NULL);
 
 	RAWINPUTDEVICE* rid = new RAWINPUTDEVICE[1];

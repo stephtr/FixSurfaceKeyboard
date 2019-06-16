@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi"><?define FixSurfaceKeyboard_TargetDir=$(var.FixSurfaceKeyboard.TargetDir)?>
-	<Product Id="*" Name="FixSurfaceKeyboard" Language="1033" Version="1.0.5.0" Manufacturer="Stephan Troyer" UpgradeCode="A4331800-4547-429D-B43B-EC66D61535F5">
+	<Product Id="*" Name="FixSurfaceKeyboard" Language="1033" Version="1.0.6.0" Manufacturer="Stephan Troyer" UpgradeCode="A4331800-4547-429D-B43B-EC66D61535F5">
 		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" Platform="x64" Manufacturer="Stephan Troyer" InstallPrivileges="elevated" />
     
     <Property Id='ARPURLINFOABOUT'>https://github.com/stephtr/FixSurfaceKeyboard</Property>

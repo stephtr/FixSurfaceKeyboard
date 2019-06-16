@@ -121,16 +121,10 @@ bool handleKey_SurfaceKeyboard(DWORD vk, int modifierState, bool keydown) {
 	// pressing the action center key results in Shift + Ctrl + Alt + Win + F21,
 	// which (obviously) doesn't open the action center.
 	static bool blockActionCenter = false;
-	if (keydown
-		&& vk == VK_F21 && modifierState == (PK_RSHIFT | PK_LCTRL | PK_RALT | PK_LWIN)
-		&& !blockActionCenter)
+	if (keydown && vk == VK_F21 && modifierState == (PK_RSHIFT | PK_LCTRL | PK_RALT | PK_LWIN))
 	{
 		ShellExecute(0, 0, L"ms-actioncenter:", 0, 0, SW_HIDE);
-		blockActionCenter = true;
-		return true;
 	}
-	if (!keydown && vk == VK_LWIN)
-		blockActionCenter = false;
 
 	return handleKey;
 }
