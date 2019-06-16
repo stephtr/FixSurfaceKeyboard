@@ -1,20 +1,26 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.26730.16
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FixSurfaceKeyboard", "FixSurfaceKeyboard\FixSurfaceKeyboard.vcxproj", "{45C7DD15-52B0-449E-A0A9-1D5FC87B98CB}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "Setup", "Setup\Setup.vdproj", "{46BC4703-C57A-49C2-954E-8605A7BCD4D8}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Setup", "Setup\Setup.wixproj", "{8A7CDFFF-60A5-4640-BDB1-487BE3EA887C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		All|x64 = All|x64
+		All|x86 = All|x86
 		Debug|x64 = Debug|x64
 		Debug|x86 = Debug|x86
 		Release|x64 = Release|x64
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{45C7DD15-52B0-449E-A0A9-1D5FC87B98CB}.All|x64.ActiveCfg = Release|x64
+		{45C7DD15-52B0-449E-A0A9-1D5FC87B98CB}.All|x64.Build.0 = Release|x64
+		{45C7DD15-52B0-449E-A0A9-1D5FC87B98CB}.All|x86.ActiveCfg = Release|Win32
+		{45C7DD15-52B0-449E-A0A9-1D5FC87B98CB}.All|x86.Build.0 = Release|Win32
 		{45C7DD15-52B0-449E-A0A9-1D5FC87B98CB}.Debug|x64.ActiveCfg = Debug|x64
 		{45C7DD15-52B0-449E-A0A9-1D5FC87B98CB}.Debug|x64.Build.0 = Debug|x64
 		{45C7DD15-52B0-449E-A0A9-1D5FC87B98CB}.Debug|x86.ActiveCfg = Debug|Win32
@@ -23,10 +29,16 @@ Global
 		{45C7DD15-52B0-449E-A0A9-1D5FC87B98CB}.Release|x64.Build.0 = Release|x64
 		{45C7DD15-52B0-449E-A0A9-1D5FC87B98CB}.Release|x86.ActiveCfg = Release|Win32
 		{45C7DD15-52B0-449E-A0A9-1D5FC87B98CB}.Release|x86.Build.0 = Release|Win32
-		{46BC4703-C57A-49C2-954E-8605A7BCD4D8}.Debug|x64.ActiveCfg = Debug
-		{46BC4703-C57A-49C2-954E-8605A7BCD4D8}.Debug|x86.ActiveCfg = Debug
-		{46BC4703-C57A-49C2-954E-8605A7BCD4D8}.Release|x64.ActiveCfg = Release
-		{46BC4703-C57A-49C2-954E-8605A7BCD4D8}.Release|x86.ActiveCfg = Release
+		{8A7CDFFF-60A5-4640-BDB1-487BE3EA887C}.All|x64.ActiveCfg = Release|x86
+		{8A7CDFFF-60A5-4640-BDB1-487BE3EA887C}.All|x64.Build.0 = Release|x86
+		{8A7CDFFF-60A5-4640-BDB1-487BE3EA887C}.All|x86.ActiveCfg = Release|x86
+		{8A7CDFFF-60A5-4640-BDB1-487BE3EA887C}.All|x86.Build.0 = Release|x86
+		{8A7CDFFF-60A5-4640-BDB1-487BE3EA887C}.Debug|x64.ActiveCfg = Debug|x86
+		{8A7CDFFF-60A5-4640-BDB1-487BE3EA887C}.Debug|x86.ActiveCfg = Debug|x86
+		{8A7CDFFF-60A5-4640-BDB1-487BE3EA887C}.Debug|x86.Build.0 = Debug|x86
+		{8A7CDFFF-60A5-4640-BDB1-487BE3EA887C}.Release|x64.ActiveCfg = Release|x86
+		{8A7CDFFF-60A5-4640-BDB1-487BE3EA887C}.Release|x86.ActiveCfg = Release|x86
+		{8A7CDFFF-60A5-4640-BDB1-487BE3EA887C}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
