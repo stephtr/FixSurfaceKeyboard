@@ -43,7 +43,13 @@ bool scheduleTask(bool install = true, char *location = NULL) {
 		return 1;
 	}
 
-	pRootFolder->DeleteTask(_bstr_t(wszTaskName), 0);
+	IRegisteredTask* pExistingTask = NULL;
+	hr = pRootFolder->GetTask(_bstr_t(wszTaskName), &pExistingTask);
+	if (!FAILED(hr)) {
+		pExistingTask->Stop(0);
+		pRootFolder->DeleteTask(_bstr_t(wszTaskName), 0);
+	}
+
 	if (!install) {
 		pRootFolder->Release();
 		pService->Release();
