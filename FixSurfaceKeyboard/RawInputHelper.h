@@ -34,7 +34,9 @@ void handleRawInput(HRAWINPUT lParam)
 	PRAWINPUT raw = (PRAWINPUT)lpb;
 	if (raw->header.dwType == RIM_TYPEKEYBOARD) {
 		auto got = g_deviceTypes.find(raw->header.hDevice);
-		if(got != g_deviceTypes.end()) g_lastUsedKeyboard = got->second;
+		if (got != g_deviceTypes.end()) {
+			g_lastUsedKeyboard = got->second;
+		}
 	}
 	delete[] lpb;
 	return;

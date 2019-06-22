@@ -101,9 +101,7 @@ bool handleKey_map(DWORD vk, KeyboardType type, PKBDLLHOOKSTRUCT data) {
 	KeyboardMap::const_iterator got = g_keymaps[type].find(vk);
 	int modifierState = getModifierState();
 	bool keydown = !(data->flags & LLKHF_UP);
-
-	if (modifierState == 0) return false;
-	if (got != g_keymaps[type].end() && data->flags & LLKHF_EXTENDED) {
+	if (modifierState != 0 && got != g_keymaps[type].end() && data->flags & LLKHF_EXTENDED) {
 		SendKey((WORD)got->second, keydown);
 		return true;
 	}
@@ -115,15 +113,23 @@ bool handleKey_map(DWORD vk, KeyboardType type, PKBDLLHOOKSTRUCT data) {
 }
 
 bool handleKey_SurfaceKeyboard(DWORD vk, int modifierState, bool keydown) {
+	const bool keyup = !keydown;
 	bool handleKey = false;
 
 	// When switching to German keyboard layout,
 	// pressing the action center key results in Shift + Ctrl + Alt + Win + F21,
 	// which (obviously) doesn't open the action center.
-	static bool blockActionCenter = false;
+	static bool triggerActionCenter = false;
 	if (keydown && vk == VK_F21 && modifierState == (PK_RSHIFT | PK_LCTRL | PK_RALT | PK_LWIN))
 	{
-		ShellExecute(0, 0, L"ms-actioncenter:", 0, 0, SW_HIDE);
+		triggerActionCenter = true;
+	}
+	if (keyup && triggerActionCenter && vk == VK_F21) {
+		triggerActionCenter = false;
+		SendKey(VK_LWIN, true);
+		SendKey('A', true);
+		SendKey('A', false);
+		SendKey(VK_LWIN, false);
 	}
 
 	return handleKey;
