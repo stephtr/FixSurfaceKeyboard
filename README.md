@@ -4,6 +4,8 @@ Download: [![Total downloads](https://img.shields.io/github/downloads/stephtr/Fi
 
 _Are you using a notebook and want to automatically switch Windows dark/light theme depending on the outdoor brightness? Make sure to check out [BrightnessSwitch](https://github.com/stephtr/BrightnessSwitch)!_
 
+---
+
 On many modern keyboards multimedia and function keys are combined with a seperate Fn key for switching between them. The disadvantage of this practice is that simply pressing combinations like <kbd>Alt</kbd>+<kbd>F4</kbd> is only possible when the seperate Fn key is in the right state (which requires to press for example <kbd>Alt</kbd>+<kbd>Fn</kbd>+<kbd>MEDIA_PREV_TRACK/F4</kbd>) even though pressing <kbd>Alt</kbd> + a multimedia key wouldn't make sense.
 Therefore some Dell notebooks automatically mapped such otherwise pointless combinations to their according Fn key complement; a function that I'm missing massively on my Microsoft Surface. The Surface Ergonomic Keyboard (at least with German keyboard layout) goes the extra mile and accepts the Fn key in key combinations only if it is the first key pressed which is very problematic if used to pressing <kbd>Alt</kbd> and <kbd>Fn</kbd> at the same time which results in a 50:50 chance.
 
